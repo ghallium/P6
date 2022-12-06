@@ -8,7 +8,7 @@ const path = require('path');
 
 const app = express();
 // npm i dotenv 
-mongoose.connect('mongodb+srv://ghallium:servietsky33@piquante.yp05etu.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect('mongodb+srv://ghallium:servietsky33@cluster0.sikmzol.mongodb.net/?retryWrites=true&w=majority',
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))

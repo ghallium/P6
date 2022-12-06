@@ -16,14 +16,14 @@ router.get('/', auth, saucesCtrl.getAllSauces);
 
 // AFFICHER UN OBJET
 
-router.get('/:userId', auth, saucesCtrl.getOneSauce);
+router.get('/:id', auth, saucesCtrl.getOneSauce);
 
 // MODIFIER UN OBJET
   
-router.put('/:userId', auth, multer, saucesCtrl.modifySauce);
+router.put('/:id', auth, multer, saucesCtrl.modifySauce);
 
-// SUPPRIMER UN OBJET
+// SUPPRIMER UN OBJET  
 
-router.delete('/:userId', auth, saucesCtrl.deleteSauce);
+router.delete('/:id', auth, saucesCtrl.deleteSauce);
 
 module.exports = router;

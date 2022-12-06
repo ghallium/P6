@@ -1,4 +1,4 @@
-const sauce = require('../models/Thing');
+const Sauce = require('../models/sauce');
 const fs = require('fs');
 
 
@@ -9,7 +9,7 @@ exports.createSauce = (req, res, next) => {
   const sauceObject = JSON.parse(req.body.sauce);
   delete sauceObject._id;
   delete sauceObject._userId;
-  const sauce = new sauce({
+  const sauce = new Sauce({
       ...sauceObject,
       userId: req.auth.userId,
       imageUrl: `${req.protocol}://${req.get('host')}/images/${req.file.filename}`
@@ -29,12 +29,12 @@ exports.modifySauce = (req, res, next) => {
   } : { ...req.body };
 
   delete sauceObject._userId;
-  sauce.findOne({_id: req.params.id})
+  Sauce.findOne({_id: req.params.id})
       .then((sauce) => {
           if (sauce.userId != req.auth.userId) {
               res.status(401).json({ message : 'Not authorized'});
           } else {
-              sauce.updateOne({ _id: req.params.id}, { ...sauceObject, _id: req.params.id})
+              Sauce.updateOne({ _id: req.params.id}, { ...sauceObject, _id: req.params.id})
               .then(() => res.status(200).json({message : 'Objet modifié!'}))
               .catch(error => res.status(401).json({ error }));
           }
@@ -47,7 +47,7 @@ exports.modifySauce = (req, res, next) => {
 // SUPPRIMER OBJET 
 
 exports.deleteSauce = (req, res, next) => {
-  sauce.findOne({ _id: req.params.id})
+  Sauce.findOne({ _id: req.params.id})
       .then(sauce => {
           if (sauce.userId != req.auth.userId) {
               res.status(401).json({message: 'Non-autorisé'});
@@ -68,7 +68,7 @@ exports.deleteSauce = (req, res, next) => {
 // AFFICHER OBJET
 
 exports.getOneSauce = (req, res, next) => {
-    sauce.findOne({ _id: req.params.id })
+    Sauce.findOne({ _id: req.params.id })
       .then(sauce => res.status(200).json(sauce))
       .catch(error => res.status(404).json({ error }));
   };
@@ -76,7 +76,7 @@ exports.getOneSauce = (req, res, next) => {
 // AFFICHER TOUS LES OBJETS 
 
 exports.getAllSauces = (req, res, next) => {
-    sauce.find()
+    Sauce.find()
       .then(sauces => res.status(200).json(sauces))
       .catch(error => res.status(400).json({ error }));
   }
