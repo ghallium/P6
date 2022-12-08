@@ -1,5 +1,7 @@
+// Importation package Mongoose pour connexion MongoDB
 const mongoose = require('mongoose');
 
+// Définition schéma d'objet sauce
 const sauceSchema = mongoose.Schema({
   userId: { type: String, required: true },
   name: { type: String, required: true },

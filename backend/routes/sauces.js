@@ -1,3 +1,5 @@
+// Importation modules "router" dans Express
+
 const express = require('express');
 const router = express.Router();
 const multer = require('../middleware/multer-config');
@@ -26,4 +28,4 @@ router.put('/:id', auth, multer, saucesCtrl.modifySauce);
 
 router.delete('/:id', auth, saucesCtrl.deleteSauce);
 
-module.exports = router;
+module.exports = router; // Export du router
