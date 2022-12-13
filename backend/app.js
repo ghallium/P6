@@ -3,16 +3,17 @@ const express = require('express');
 // Import package Mongoose
 const mongoose = require('mongoose');
 const helmet = require('helmet');
+require('dotenv').config({ path: 'config/.env' });
 
 // Constantes Routes principales
 const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
 
 const path = require('path');
-
 const app = express();
+
 // Connexion admin 
-mongoose.connect('mongodb+srv://ghallium:servietsky33@cluster0.sikmzol.mongodb.net/?retryWrites=true&w=majority',
+mongoose.connect(process.env.MONGO,
   { useNewUrlParser: true,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
