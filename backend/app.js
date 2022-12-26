@@ -9,6 +9,7 @@ require('dotenv').config({ path: 'config/.env' });
 const saucesRoutes = require('./routes/sauces');
 const userRoutes = require('./routes/user');
 
+// Définition des chemins d'accès
 const path = require('path');
 const app = express();
 
@@ -18,6 +19,8 @@ mongoose.connect(process.env.MONGO,
     useUnifiedTopology: true })
   .then(() => console.log('Connexion à MongoDB réussie !'))
   .catch(() => console.log('Connexion à MongoDB échouée !'));
+
+mongoose.set('strictQuery', false);
 
 app.use(express.json());
 
